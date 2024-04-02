@@ -18,8 +18,8 @@ struct ChatArgs<'a> {
 #[function_component(App)]
 pub fn app() -> Html {
     let msg_input_ref = use_node_ref();
-    let my_message = use_state(|| String::new());
-    let total_msg = use_state(|| Vec::<String>::new());
+    let my_message = use_state(String::new);
+    let total_msg = use_state(Vec::<String>::new);
 
     {
         let total_msg = total_msg.clone();
@@ -33,7 +33,7 @@ pub fn app() -> Html {
                     }
 
                     let args = to_value(&ChatArgs {
-                        message: &*my_message,
+                        message: &my_message,
                     })
                     .unwrap();
                     // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
